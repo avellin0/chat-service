@@ -7,7 +7,7 @@ import { useNavigate} from 'react-router'
 export function LoginPage() {
 
     const [email, setEmail] = useState('')
-    const [senha, setSenha] = useState('')
+    // const [senha, setSenha] = useState('')
 
     let navigate = useNavigate()
 
@@ -63,7 +63,7 @@ export function LoginPage() {
 
                     <div id="login-input-scope">
                         <input type="email" className='login-input' placeholder='Email' onChange={(e) => setEmail(e.target.value)} />
-                        <input type="password" className='login-input' placeholder='Senha' onChange={(e) => setSenha(e.target.value)} />
+                        <input type="password" className='login-input' placeholder='Senha' onChange={(e) => console.log(e.target.value)} />
                         <button id='login-btn' onClick={() => LoginUser()}>Entrar</button>
                     </div>
                 </div>
