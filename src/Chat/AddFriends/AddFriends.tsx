@@ -1,61 +1,59 @@
 import "./AddFriends.css"
-import {socket} from "../connect/socket"
-import {useState} from "react"
-import { useParams, useNavigate} from "react-router-dom"
+import { useState } from "react"
+import { useParams, useNavigate } from "react-router-dom"
 
-export function AddFriends () {
-    const {id} = useParams<{id: string}>()
-    
-    const [Name, setName] = useState<string>()
-    const [Friendid, setFriendid] = useState<string>()
-       
+export function AddFriends() {
+    const { id } = useParams<{ id: string }>()
+
+    const [Friendid, setFriendid] = useState<string>(String(id))
+
     const navigate = useNavigate()
 
 
-    const AddNewFriend = async() => {
+    const AddNewFriend = async () => {
 
-    if(Friendid === null || Friendid === undefined) return
-        if(!Friendid.trim()) return
+        console.log("this is the id:", id);
+        
 
-    if(typeof(id) !== "string") return
+        if (Friendid === null || Friendid === undefined) return
+        if (!Friendid.trim()) return
 
-    console.log(Friendid, id);
-    
+        if (typeof (id) !== "string") return
 
-    const response = await fetch('http://localhost:3000/newfriends',{
+        console.log("this is the user id:", Friendid,"and this is your friend id:", id);
+
+        const newFriendsQuery = {
+            friendOf: id,
+            id: Friendid
+        }
+
+        const response = await fetch('https://extude.onrender.com/newfriends', {
             method: 'POST',
             headers: {
-                'Content-Type': 'application/json'
+                'content-type': 'application/json'
             },
-            body: JSON.stringify({
-                friendOf: id?.toString().slice(1),
-                id: Friendid
-            })
+            body: JSON.stringify(newFriendsQuery)
         }
-    )
+        )
 
-    if(!response.ok){
-        throw new Error("Have some wrong here")
-    }
+        //id: 180bca53-d7dd-4468-b8e6-31306c731149
+
+        if (!response.ok) {
+            throw new Error("Have some wrong here")
+        }
 
 
-        socket.emit("port3005", {
-            friendOf: id,
-            name: Name,
-            id: Friendid 
-        })
+        navigate(`/chat/${id}`)
 
-        navigate(`/comunity/${id}`)
-
-      return 
+        return
     }
 
 
     return (
         <div id="AddFriends-scope">
-            <h1>Hello new Friend!</h1>
-            <input type="text" placeholder="Name" onChange={(e) => setName(e.target.value)}/>
-            <input type="text" placeholder="id" onChange={(e) => setFriendid(e.target.value)}/>
+            <h1>Add your new Contact</h1>
+            <input type="text" placeholder="Name" onChange={(e) => console.log(e.target.value)} />
+            <input type="text" placeholder="id" onChange={(e) => setFriendid(e.target.value)} />
             <button onClick={() => AddNewFriend()}>Save</button>
         </div>
     )

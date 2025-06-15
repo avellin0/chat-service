@@ -1,6 +1,8 @@
 import { createBrowserRouter } from "react-router-dom";
 import {App} from "../App";
 import { Chat } from "../Chat/Chat";
+import { PrivateChat } from "../Chat/Individual-chat/PrivateChat";
+import { AddFriends } from "../Chat/AddFriends/AddFriends";
 
 export const router = createBrowserRouter([
         {
@@ -8,11 +10,15 @@ export const router = createBrowserRouter([
             element: <App/>
         },
         {
-            path: "/chat",
-            element: <Chat/>
+            path: "/chat/:id",
+            element: <Chat />
         },
         {
-            path: "/chat/:id",
-            element: <Chat/>
+            path: "/chat/:id/:friends_id",
+            element: <PrivateChat/>
+        },
+        {
+            path: "/chat/:id/newfriend",
+            element: <AddFriends/>
         }
 ])
