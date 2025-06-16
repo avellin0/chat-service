@@ -11,10 +11,6 @@ jobs:
         
         - name: install deps
           run: npm install
-
-        - name: run front-end
-          run: npm run dev
-
   cd:
     needs: ci
     runs-on: ubuntu-latest
