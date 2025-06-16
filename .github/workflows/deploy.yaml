@@ -17,6 +17,7 @@ jobs:
 
   cd:
     needs: ci
+    runs-on: ubuntu-latest
     steps: 
         - name: install deps
           run: npm install
