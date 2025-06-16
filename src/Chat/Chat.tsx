@@ -15,7 +15,6 @@ interface FriendsProps {
 }
 
 
-
 export function Chat() {
 
     const [username, setUsername] = useState('')
@@ -43,8 +42,9 @@ export function Chat() {
         window.addEventListener("resize", atualizarLargura);
 
 
+        console.log("this is the address:", friends_id);
         setAddress(String(friends_id))
-
+        
         const handleMessage = (data: TypeOfMessage) => {
             console.log("info data result", data);
             setMessage((current) => [...current, data])
@@ -59,7 +59,7 @@ export function Chat() {
             socket.off()
             window.removeEventListener("resize", atualizarLargura);
         }
-    }, [])
+    }, [friends_id])
 
     const getUserInfo = async () => {
         try {
@@ -100,9 +100,10 @@ export function Chat() {
 
         if (!friends_id ) {
             console.log("Indo para um chat privado");
-            navigate(`${friends_name}`)
+            navigate(`/chat/${id}/${friends_name}`)
         }
-
+        
+        navigate(`/chat/${id}/${friends_name}`)
 
         console.log("Ja estou em um chat privado", friends_id);
 
@@ -129,6 +130,7 @@ export function Chat() {
             throw new Error("Erro ao buscar nome do usuario")
         }
     }
+
 
 
 
