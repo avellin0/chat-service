@@ -7,21 +7,32 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model User_message {
-  id       String @id
-  username String
+model User {
+  id       String @id @default(uuid())
+  email    String @unique
+  password String
+  username String @unique
+
+  friends Friends[]
 
   mensagensRecebidas message[] @relation("mensagensRecebidas")
   mensagensEnviadas  message[] @relation("mensagensEnviadas")
 }
 
 model message {
-  id             String       @id @default(uuid())
-  conteudo       String
-  remetente      User_message @relation("mensagensEnviadas", fields: [remetentId], references: [id])
-  destinatario   User_message @relation("mensagensRecebidas", fields: [destinatarioId], references: [id])
-  remetentId     String
-  destinatarioId String
+  id             String  @id @default(uuid())
+  conteudo       String?
+  remetente      User?   @relation("mensagensEnviadas", fields: [remetentId], references: [username])
+  destinatario   User?   @relation("mensagensRecebidas", fields: [destinatarioId], references: [username])
+  remetentId     String?
+  destinatarioId String?
 
   create_at DateTime @default(now())
+}
+
+model Friends {
+  id       String  @id @default(uuid())
+  username String
+  User     User?   @relation(fields: [userId], references: [id])
+  userId   String?
 }
