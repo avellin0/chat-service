@@ -19,6 +19,6 @@ export class CreateFriends{
         } catch (err) {
             console.log("this is the error:",err);
             res.status(400).json({ message: "Erro imprevisto na criação" })
-        }
+        }    
     }
 }

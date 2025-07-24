@@ -19,7 +19,8 @@ export class CreateUser {
 
             await setRedis(`user-${email}`, JSON.stringify(response))
 
-            return res.status(200).json(response)
+            res.status(200).json(response)
+            // return res.status(200).json(response)
 
         } catch (error) {
             console.log("aconteceu algo inesperado");

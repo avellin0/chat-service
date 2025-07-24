@@ -1,19 +1,25 @@
 import {Router} from "express"
 const route = Router()
 
-import {CreateMessage} from "../controller/Messages/CreateMessage.ts"
-const sendMessage = new CreateMessage()
-import {latestMessages} from "../controller/Messages/LatestMessages.ts"
+import {latestMessages} from "../controller/Messages/LatestMessages"
 const getMessages = new latestMessages()
-import {CreateUser} from "../controller/verifyUserAccount/CreateUsers.ts"
+
+import {CreateMessage} from "../controller/Messages/CreateMessage"
+const sendMessage = new CreateMessage()
+
+import {CreateUser} from "../controller/verifyUserAccount/CreateUsers"
 const newUser = new CreateUser()
-import { verifyUserAccount } from "../controller/verifyUserAccount/VerifyAccount.ts"
-const verify = new verifyUserAccount()
-import { CreateFriends } from "../controller/Friends/CreateFriends.ts"
+
+import { CreateFriends } from "../controller/Friends/CreateFriends"
 const newFriend = new CreateFriends()
-import { verifyFriends} from "../controller/Friends/VerifyFriends.ts"
+
+import { verifyUserAccount } from "../controller/verifyUserAccount/VerifyAccount"
+const verify = new verifyUserAccount()
+
+import { verifyFriends} from "../controller/Friends/VerifyFriends"
 const verifyFriendsAccount = new verifyFriends()
-import { verifyUserInfo } from "../controller/verifyUserAccount/VerifyUserInfo.ts"
+
+import { verifyUserInfo } from "../controller/verifyUserAccount/VerifyUserInfo"
 const user_info = new verifyUserInfo()
 
 

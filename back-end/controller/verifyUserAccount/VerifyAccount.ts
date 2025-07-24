@@ -1,4 +1,4 @@
-import { Request, Response } from "express";
+import { NextFunction, Request, Response} from "express";
 import { PrismaClient } from "@prisma/client";
 import { getRedis } from "../../redis.config";
 const prisma = new PrismaClient()
@@ -9,22 +9,28 @@ export class verifyUserAccount {
 
         const userRedis = await getRedis(`user-${email}`)
 
-        if (!userRedis) {
-            const alreadyHaveAccount = await prisma.user.findFirst({
-                where: { email: email }
-            })
+        try {
+            if (!userRedis || typeof(userRedis) !== 'string') {
+                const alreadyHaveAccount = await prisma.user.findFirst({
+                    where: { email: email }
+                })
 
-            if (!alreadyHaveAccount) {
-                console.log('Usuario não encontrado');
-                res.status(404).json("usuario não encontrado")
+                if (!alreadyHaveAccount) {
+                    console.log('Usuario não encontrado');
+                    res.status(404).json("usuario não encontrado")
+                }
+
+                res.status(200).send(alreadyHaveAccount)
+                return
             }
+            
+            const user = JSON.parse(userRedis)
 
-            return res.status(200).send(alreadyHaveAccount)
+            res.status(200).json(user)
+            // return res.status(200).send(user)
+        } catch (err) {
+            console.log("aconteceu algo inesperado");
+            res.status(400).json({ message: err })
         }
-
-        const user = JSON.parse(userRedis)
-
-        return res.status(200).send(user)
-
     }
 }

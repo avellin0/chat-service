@@ -8,7 +8,6 @@ export class CreateMessage {
 
         try {
 
-
             const response = await prisma.message.create({data: {
                 conteudo: message,
                 remetente: {connect: {username: id}},
