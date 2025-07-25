@@ -75,7 +75,7 @@ export function SignIn() {
         try {
             AlreadySign(email)
 
-            const createAccount = await fetch('http://localhost:3000/new_user', {
+            const createAccount = await fetch('https://chat-service-tjzg.onrender.com/new_user', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -99,7 +99,7 @@ export function SignIn() {
 
     const pegarId = async () => {
 
-        const getId = await fetch(`http:/localhost:3000/user_info/${username}`)
+        const getId = await fetch(`https://chat-service-tjzg.onrender.com/user_info/${username}`)
 
         if (!getId.ok) {
             throw new Error('Não estou conseguindo buscar');
