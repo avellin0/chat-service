@@ -1,6 +1,8 @@
 import Redis from "ioredis";
+import {config} from "dotenv"
+config()
 
-const redisClient = new Redis();
+const redisClient = new Redis(process.env.REDIS_URL || "")
 
 function getRedis(key: string) {
     return redisClient.get(key); 
