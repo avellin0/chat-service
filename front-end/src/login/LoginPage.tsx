@@ -16,7 +16,6 @@ export function LoginPage() {
             "email": email
         }
         try {
-
             const response = await fetch("https://chat-service-tjzg.onrender.com/verify", {
                 method: 'POST',
                 headers: {
