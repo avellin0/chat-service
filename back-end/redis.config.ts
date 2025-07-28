@@ -1,15 +1,24 @@
 import Redis from "ioredis";
-import {config} from "dotenv"
+import { config } from "dotenv"
 config()
 
-const redisClient = new Redis(process.env.REDIS_URL || "")
+
+let redisClient: Redis | null = null
+
+if (process.env.REDIS_URL) {
+    redisClient = new Redis(process.env.REDIS_URL)
+} else {
+    console.log("Redis desativado")
+}
 
 function getRedis(key: string) {
-    return redisClient.get(key); 
+    if (!redisClient) return Promise.resolve(null)
+    return redisClient.get(key)
 }
 
 function setRedis(key: string, value: string) {
-    return redisClient.set(key, value); 
+    if (!redisClient) return Promise.resolve(null)
+    return redisClient.set(key, value)
 }
 
-export { redisClient, getRedis, setRedis };
+export { redisClient, getRedis, setRedis }
