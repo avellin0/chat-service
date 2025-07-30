@@ -21,7 +21,9 @@ export function SideBar({id}: FriendsProps){
             headers: { 'content-type': 'application/json' },
             body: JSON.stringify({"name": id })
         })
+
         const data = await response.json()
+        console.log("esse é o data:", data);
         
         setFriends(data.friends)
     }

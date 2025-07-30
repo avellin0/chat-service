@@ -52,7 +52,8 @@ export function Chat() {
     const getMessages = async () => {
         const response = await fetch(`http://localhost:3000/refresh_message/${id}`)
         const data = await response.json()
-
+        console.log("essa é a ultima menssagem:", data);
+    
         setHasMessage(data)
     }
 

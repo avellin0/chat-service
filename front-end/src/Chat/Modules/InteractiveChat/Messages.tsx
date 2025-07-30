@@ -7,18 +7,18 @@ interface MessageProps {
     id: any
 }
 
-export function MessagesInput({ friend, id}: MessageProps) {
+export function MessagesInput({ friend, id }: MessageProps) {
     const textRef = useRef<HTMLInputElement>(null)
     const [text, setText] = useState<string>('')
     const [address, setAddress] = useState<string>('')
 
-    
+
 
 
     useEffect(() => {
 
-        console.log("This is the id:",id,"this is the friend_name:",friend);
-        
+        console.log("This is the id:", id, "this is the friend_name:", friend);
+
         setAddress(friend)
     })
 
@@ -31,6 +31,10 @@ export function MessagesInput({ friend, id}: MessageProps) {
             addresse: address
         }
 
+        if (messageQuery) {
+            socket.emit("port3003", messageQuery)
+        }
+
         const createMessage = {
             id: id as string,
             message: text,
@@ -40,7 +44,6 @@ export function MessagesInput({ friend, id}: MessageProps) {
         console.log(createMessage);
 
 
-        socket.emit("port3003", messageQuery)
 
         fetch('http://localhost:3000/create_message', {
             method: 'POST',
