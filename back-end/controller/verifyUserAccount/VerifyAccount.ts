@@ -27,7 +27,7 @@ export class verifyUserAccount {
             const user = JSON.parse(userRedis)
 
             res.status(200).json(user)
-            // return res.status(200).send(user)
+            
         } catch (err) {
             console.log("aconteceu algo inesperado");
             res.status(400).json({ message: err })
