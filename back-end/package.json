@@ -11,7 +11,8 @@
     "server": "tsx --watch server/server.ts",
     "chat": "tsx --watch Socket/socket.server.ts",
     "build": "tsc",
-    "start": "node dist/server/server.js && node dist/Socket/socket.server.js",
+    "start": "node dist/server/server.js",
+    "start_chat": "node dist/Socket/socket.server.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "dependencies": {
