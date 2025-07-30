@@ -1,6 +1,5 @@
 import { useEffect, useRef, useState } from "react"
 import { socket } from "../../connect/socket"
-import { useParams } from "react-router-dom"
 
 interface MessageProps {
     friend: any
@@ -45,7 +44,7 @@ export function MessagesInput({ friend, id }: MessageProps) {
 
 
 
-        fetch('http://localhost:3000/create_message', {
+        fetch('https://chat-service-tjzg.onrender.com/create_message', {
             method: 'POST',
             headers: { 'content-type': 'application/json' },
             body: JSON.stringify(createMessage)

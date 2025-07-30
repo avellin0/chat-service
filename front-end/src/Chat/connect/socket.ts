@@ -1,4 +1,3 @@
 import {io} from "socket.io-client"
-const socket = io("https://chat-service-tjzg.onrender.com")
-// https://chat-service-tjzg.onrender.com
+const socket = io("https://socket-service-b4sn.onrender.com")
 export {socket}

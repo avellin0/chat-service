@@ -29,7 +29,7 @@ export function Mobile() {
 
     const getAllUsers = async () => {
 
-        const response = await fetch("http://localhost:3000/verify_friends", {
+        const response = await fetch("https://chat-service-tjzg.onrender.com/verify_friends", {
             method: 'POST',
             headers: { 'content-type': 'application/json' },
             body: JSON.stringify({ "name": id })
