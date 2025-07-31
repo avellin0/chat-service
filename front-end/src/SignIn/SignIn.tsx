@@ -47,7 +47,7 @@ export function SignIn() {
 
     const AlreadySign = async (email: Email | string) => {
         try {
-            const response = await fetch('https://extude.onrender.com/students', {
+            const response = await fetch('https://chat-service-tjzg.onrender.com/verify', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',

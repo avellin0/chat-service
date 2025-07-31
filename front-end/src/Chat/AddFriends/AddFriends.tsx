@@ -23,7 +23,7 @@ export function AddFriends() {
         console.log("this is the user id:", FriendName, "and this is your friend id:", id);
 
 
-        const getFriendInfo = await fetch(`http://localhost:3000/user_info/${FriendName}`);
+        const getFriendInfo = await fetch(`https://chat-service-tjzg.onrender.com/user_info/${FriendName}`);
         const data = await getFriendInfo.json()
 
         console.log("this is the friend info:", data.id);
@@ -37,7 +37,7 @@ export function AddFriends() {
         console.log("this is the query:", newFriendsQuery);
         
 
-        const response = await fetch('http://localhost:3000/new_friend', {
+        const response = await fetch('https://chat-service-tjzg.onrender.com/new_friend', {
             method: 'POST',
             headers: {
                 'content-type': 'application/json'
