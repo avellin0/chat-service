@@ -58,6 +58,7 @@ export function LoginPage() {
                     </div>
 
                     <div id="login-input-scope">
+                        <button onClick={() => navigate('/chat/demo')}>Recrutadores</button>
                         <input type="email" className='login-input' placeholder='Email' onChange={(e) => setEmail(e.target.value)} />
                         <input type="password" className='login-input' placeholder='Senha' onChange={(e) => console.log(e.target.value)} />
                         <div id='login-btn-scope'>

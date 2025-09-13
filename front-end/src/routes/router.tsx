@@ -4,6 +4,7 @@ import { Chat } from "../Chat/Chat"
 import { PrivateChat } from "../Chat/Individual-chat/PrivateChat"
 import { AddFriends } from "../Chat/AddFriends/AddFriends"
 import { SignIn } from "../SignIn/SignIn"
+import { Demo } from "../Chat/Demo/Demo"
 
 export const router = createBrowserRouter([
     {
@@ -29,6 +30,9 @@ export const router = createBrowserRouter([
     {
         path: "/sign",
         element: <SignIn/>
-
+    },
+    {
+        path: "/chat/demo",
+        element: < Demo/>
     }
 ])

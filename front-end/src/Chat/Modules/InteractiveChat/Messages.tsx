@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from "react"
 import { socket } from "../../connect/socket"
+import "./Messages.css"
 
 interface MessageProps {
     friend: any
@@ -42,33 +43,34 @@ export function MessagesInput({ friend, id }: MessageProps) {
 
         console.log(createMessage);
 
+        if (id !== "bob" || id !== "Alice") {
 
+            fetch('https://chat-service-tjzg.onrender.com/create_message', {
+                method: 'POST',
+                headers: { 'content-type': 'application/json' },
+                body: JSON.stringify(createMessage)
+            })
+        }
 
-        fetch('https://chat-service-tjzg.onrender.com/create_message', {
-            method: 'POST',
-            headers: { 'content-type': 'application/json' },
-            body: JSON.stringify(createMessage)
-        })
+            setText('')
+            if (textRef.current) textRef.current.value = ''
+        }
 
-        setText('')
-        if (textRef.current) textRef.current.value = ''
+        return (
+            <>
+
+                <div id="chat-text-input-scope">
+                    <input
+                        type="text"
+                        id="chat-input"
+                        ref={textRef}
+                        value={text}
+                        onChange={(e) => setText(e.currentTarget.value)}
+                        placeholder="Select your Contact"
+                        onKeyDown={(e) => { e.key === 'Enter' && sendMessage() }}
+                    />
+                    <button id="chat-submit-btn" onClick={sendMessage}>Enviar</button>
+                </div>
+            </>
+        )
     }
-
-    return (
-        <>
-
-            <div id="chat-text-input-scope">
-                <input
-                    type="text"
-                    id="chat-input"
-                    ref={textRef}
-                    value={text}
-                    onChange={(e) => setText(e.currentTarget.value)}
-                    placeholder="Select your Contact"
-                    onKeyDown={(e) => { e.key === 'Enter' && sendMessage() }}
-                />
-                <button id="chat-submit-btn" onClick={sendMessage}>Enviar</button>
-            </div>
-        </>
-    )
-}
